@@ -1,0 +1,68 @@
+# Optimized Animation and Hydration Logic
+
+Source: https://github.com/grx7/framer-motion/blob/main/dev/html/public/optimized-appear/persist-optimised-animation.html
+
+Demonstrates how to emulate server-side rendering with ReactDOMServer, trigger optimized animations via WAAPI, and hydrate the component on the client side without interrupting the animation.
+
+```javascript
+const { motion, animateStyle, animate, startOptimizedAppearAnimation, optimizedAppearDataAttribute, motionValue, frame, } = window.Motion;
+const { matchViewportBox } = window.Assert;
+const root = document.getElementById("root");
+const duration = 2;
+const x = motionValue(0);
+let isFirstFrame = true;
+
+// This is the tree to be rendered "server" and client-side.
+const Component = React.createElement(motion.div, {
+  id: "box",
+  initial: { x: 0, opacity: 0 },
+  animate: { x: 100, opacity: 1 },
+  transition: { duration, ease: "linear" },
+  style: { x },
+  /**
+   * On animation start, check the values we expect to see here
+   */
+  onAnimationStart: () => {
+    const box = document.getElementById("box");
+    box.style.backgroundColor = "green";
+    setTimeout(() => {
+      box.style.transform = "scale(2)";
+      const { width } = box.getBoundingClientRect();
+      if (width !== 100) {
+        showError(
+          document.getElementById("box"),
+          `Setting transform became visible, which means optimised animation has been prematurely cancelled. Width was ${width}px instead of 200px.`
+        );
+      }
+    }, 100);
+  },
+  [optimizedAppearDataAttribute]: "a",
+  children: "Content",
+});
+
+// Emulate server rendering of element
+root.innerHTML = ReactDOMServer.renderToString(Component);
+
+// Start optimised opacity animation
+startOptimizedAppearAnimation(
+  document.getElementById("box"),
+  "opacity",
+  [0, 1],
+  { duration: duration * 1000, ease: "linear" }
+);
+
+// Start WAAPI animation
+const animation = startOptimizedAppearAnimation(
+  document.getElementById("box"),
+  "transform",
+  ["translateX(0px)", "translateX(100px)"],
+  { duration: duration * 1000, ease: "linear" },
+  (animation) => {
+    setTimeout(() => {
+      ReactDOM.hydrateRoot(root, Component);
+    }, (duration * 1000) / 2);
+  }
+);
+```
+
+--------------------------------

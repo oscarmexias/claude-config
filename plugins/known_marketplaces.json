@@ -1,0 +1,18 @@
+{
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/oscar.mejia/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-04-15T21:53:26.422Z"
+  },
+  "thedotmack": {
+    "source": {
+      "source": "github",
+      "repo": "thedotmack/claude-mem"
+    },
+    "installLocation": "/Users/oscar.mejia/.claude/plugins/marketplaces/thedotmack",
+    "lastUpdated": "2026-04-07T10:02:11.732Z"
+  }
+}

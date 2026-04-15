@@ -1,0 +1,39 @@
+# API Groups
+
+- **Myself**: Endpoints related to the authenticated user.
+- **Permissions**: Endpoints for managing permissions.
+- **Permission Schemes**: Endpoints for managing permission schemes.
+- **Plans**: Endpoints related to Jira plans.
+- **Priority Schemes**: Endpoints for managing priority schemes.
+- **Projects**: Endpoints for managing projects.
+- **Project Templates**: Endpoints for managing project templates.
+- **Project Avatars**: Endpoints for managing project avatars.
+- **Project Categories**: Endpoints for managing project categories.
+- **Project Classification Levels**: Endpoints for managing project classification levels.
+- **Project Components**: Endpoints for managing project components.
+- **Project Email**: Endpoints related to project email settings.
+- **Project Features**: Endpoints for managing project features.
+- **Project Key and Name Validation**: Endpoints for validating project keys and names.
+- **Project Permission Schemes**: Endpoints for managing permission schemes for projects.
+- **Project Properties**: Endpoints for managing project properties.
+- **Project Roles**: Endpoints for managing project roles.
+- **Project Role Actors**: Endpoints for managing actors within project roles.
+- **Project Types**: Endpoints for managing project types.
+- **Project Versions**: Endpoints for managing project versions.
+- **Screens**: Endpoints for managing screens.
+- **Screen Tabs**: Endpoints for managing screen tabs.
+- **Screen Tab Fields**: Endpoints for managing fields within screen tabs.
+- **Screen Schemes**: Endpoints for managing screen schemes.
+- **Server Info**: Endpoints for retrieving server information.
+- **Service Registry**: Endpoints for managing the service registry.
+- **Status**: Endpoints related to issue statuses.
+- **Tasks**: Endpoints for managing tasks.
+- **Teams in Plan**: Endpoints for managing teams within a plan.
+- **Time Tracking**: Endpoints for managing time tracking.
+- **UI Modifications Apps**: Endpoints for managing UI modifications via apps.
+- **Users**: Endpoints for managing users.
+- **User Nav Properties**: Endpoints for managing user navigation properties.
+- **User Properties**: Endpoints for managing user properties.
+- **User Search**: Endpoints for searching users.
+- **Webhooks**: Endpoints for managing webhooks.
+- **Workflows**: Endpoints for managing workflows.

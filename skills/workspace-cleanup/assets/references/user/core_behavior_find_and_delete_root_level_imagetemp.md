@@ -1,0 +1,3 @@
+# Core behavior: find and delete root-level image/temp files
+
+Use bash find with maxdepth 1 to locate *.png *.jpg *.jpeg *.gif *.webp *.tmp *.temp files at the workspace root. Print the list with sizes (ls -lh) before deleting. Delete with rm. Report count before and after. Never recurse into subdirectories. Never touch source files or named project files like package.json, README.md, CLAUDE.md, tsconfig.json.

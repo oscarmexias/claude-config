@@ -1,0 +1,60 @@
+# ~/.claude .gitignore
+# Machine-specific and ephemeral files — NOT for version control
+
+# Ephemeral session data
+plans/
+todos/
+shell-snapshots/
+projects/
+sessions/
+session-env/
+tasks/
+
+# Cache and telemetry
+cache/
+tmp/
+telemetry/
+statsig/
+file-history/
+image-cache/
+paste-cache/
+debug/
+downloads/
+backups/
+ide/
+
+# Machine-specific settings (permisos locales, paths del equipo)
+settings.local.json
+
+# History (can be huge, machine-specific)
+history.jsonl
+
+# Old CLAUDE.md backups
+CLAUDE.md.backup-*
+
+# Plugin runtime data (list is preserved, binaries are reinstalled)
+plugins/cache/
+plugins/data/
+
+# GSD-T runtime files (machine-specific)
+.gsd-t-projects
+.gsd-t-update-check
+.gsd-t-version
+
+# Security warning state files (runtime, machine-specific)
+security_warnings_state_*.json
+
+# Settings backup and local override
+settings.json.bak
+settings.local
+
+# Stats cache (runtime)
+stats-cache.json
+
+# MCP runtime cache
+mcp-needs-auth-cache.json
+
+# macOS
+.DS_Store
+.AppleDouble
+._*

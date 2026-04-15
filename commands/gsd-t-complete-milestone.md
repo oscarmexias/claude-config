@@ -1,0 +1,307 @@
+# GSD-T: Complete Milestone — Archive and Tag Release
+
+You are finalizing a completed milestone. Your job is to archive the milestone documentation, create a git tag, and prepare for the next milestone.
+
+This command is:
+- **Auto-invoked** at the end of `/user:gsd-t-wave` after verify passes
+- **Standalone** when user wants to manually close a milestone
+
+## Step 1: Verify Completion
+
+Read:
+1. `.gsd-t/progress.md` — confirm status is VERIFIED
+2. `.gsd-t/verify-report.md` — confirm all checks passed
+
+If status is not VERIFIED:
+"⚠️ Milestone not yet verified. Run `/user:gsd-t-verify` first, or use `--force` to complete anyway."
+
+If `--force` flag provided, proceed with warning in archive.
+
+## Step 1.25: Graph-Enhanced Completion Check
+
+If `.gsd-t/graph/meta.json` exists (graph index is available):
+1. Query `getEntitiesByDomain` to validate all planned entities were implemented — compare against domain task lists
+2. Query `findDeadCode` to flag unreachable implementations that may indicate incomplete wiring or orphaned code
+3. If missing entities or significant dead code found, block completion and report gaps
+
+If graph is not available, skip this step.
+
+## Step 1.5: Smoke Test Artifact Gate (MANDATORY — Categories 2 and 7)
+
+Before archiving, verify that high-risk features have testable artifacts. This gate catches what code review and unit tests cannot.
+
+**Scan this milestone's domains for any of the following:**
+- Audio capture/playback, speech recognition/synthesis
+- GPU/WebGPU/WebGL compute or rendering
+- ML inference, model loading, quantized model execution
+- Background workers, service workers, IPC channels
+- Native APIs (camera, bluetooth, filesystem, microphone)
+- WebAssembly modules
+- Any feature whose only prior "test" was manual user interaction
+
+**For each high-risk feature found:**
+
+1. Check that a smoke test script exists (in `scripts/`, `tests/`, or `.gsd-t/smoke-tests/`)
+2. Check that the script was run and passed (evidence in token-log.md, CI output, or a `.gsd-t/smoke-tests/{feature}.md` file with run results)
+3. If manual steps remain unavoidable: `.gsd-t/smoke-tests/{feature}.md` must exist documenting exact steps and confirming they passed
+
+**If any high-risk feature lacks a smoke test artifact → BLOCK completion.**
+Do not proceed to archiving. Create the smoke test now, run it, confirm it passes, then continue.
+
+> This gate exists because complete-milestone is the last opportunity to catch "shipped blind" features before they become user-facing bugs requiring 15 debug sessions to resolve.
+
+## Step 2: Gap Analysis Gate
+
+After verification passes, run a gap analysis against `docs/requirements.md` scoped to this milestone's deliverables:
+
+1. Identify which requirements this milestone was supposed to satisfy (from domain scopes, tasks, and milestone definition)
+2. Run `gsd-t-gap-analysis` against those requirements, comparing spec to actual code
+3. If **all gaps resolved** (100% Implemented) → proceed to Step 2
+4. If **gaps found** (Partial, Incorrect, or Not Implemented):
+   a. Auto-fix: execute remediation for each gap (prioritize Critical → High → Medium)
+   b. Run affected tests (unit + integration + Playwright E2E if configured)
+   c. Re-run `gsd-t-verify` to confirm fixes don't break anything
+   d. Re-run gap analysis to confirm gaps are resolved
+   e. If gaps remain after **2 fix cycles** → STOP and report unresolved gaps to user
+
+This is a **mandatory gate** — the milestone cannot be archived with known gaps against its requirements.
+
+## Step 2.5: Distillation — Extract Milestone Patterns
+
+Before archiving, extract learning from the event stream to improve future runs.
+
+1. Check if `.gsd-t/events/` exists and has any `.jsonl` files for this milestone period
+   - If no events files found: skip distillation (log "No events recorded — distillation skipped"), continue to Step 3
+   - If event-writer not installed (`node ~/.claude/scripts/gsd-t-event-writer.js 2>/dev/null || true`): skip gracefully
+
+2. Parse events: scan `.gsd-t/events/*.jsonl` for events with `"outcome":"failure"` or `"outcome":"learning"`
+
+3. Group by `reasoning` field value — count occurrences of each distinct reasoning string
+
+4. For each group with ≥ 3 occurrences:
+   - Formulate a concrete rule (e.g., "Always read X before modifying Y — failed 4 times without this")
+   - Present to user: "Pattern found {N} times: {reasoning}. Proposed rule: '{rule}'. Add to CLAUDE.md? [y/n]"
+   - **Wait for user confirmation before writing** (Destructive Action Guard — CLAUDE.md changes require approval)
+   - If approved: append the rule to CLAUDE.md under the relevant section
+   - Write event: `node ~/.claude/scripts/gsd-t-event-writer.js --type distillation --command gsd-t-complete-milestone --reasoning "{rule}" --outcome success || true`
+
+5. If no patterns found (fewer than 3 occurrences): log "Distillation complete — no repeating patterns found", continue to Step 3
+
+## Step 3: Gather Milestone Artifacts
+
+Collect all files related to this milestone:
+- `.gsd-t/progress.md` (current state)
+- `.gsd-t/verify-report.md`
+- `.gsd-t/impact-report.md` (if exists)
+- `.gsd-t/test-coverage.md` (if exists)
+- `.gsd-t/domains/*/` (all domain folders)
+- `.gsd-t/contracts/` (snapshot)
+
+## Step 4: Create Archive
+
+Create milestone archive directory:
+
+```
+.gsd-t/milestones/{milestone-name}-{date}/
+├── progress.md           # Final state
+├── verify-report.md      # Verification results
+├── impact-report.md      # Impact analysis (if any)
+├── test-coverage.md      # Test sync report (if any)
+├── summary.md            # Generated summary (see below)
+├── contracts/            # Contract snapshot at completion
+│   └── ...
+└── domains/              # Domain artifacts
+    └── ...
+```
+
+## Step 5: Generate Summary
+
+Create `summary.md`:
+
+```markdown
+# Milestone Complete: {name}
+
+**Completed**: {date}
+**Duration**: {start date} → {end date}
+**Status**: {VERIFIED | FORCED}
+
+## What Was Built
+{Extract from progress.md and domain scopes}
+
+## Domains
+| Domain | Tasks Completed | Key Deliverables |
+|--------|-----------------|------------------|
+| {name} | {N} | {summary} |
+
+## Contracts Defined/Updated
+- {contract}: {new | updated | unchanged}
+
+## Key Decisions
+{Extract from Decision Log in progress.md}
+
+## Issues Encountered
+{Extract any remediation tasks or blocked items}
+
+## Test Coverage
+- Tests added: {N}
+- Tests updated: {N}
+- Coverage: {if known}
+
+## Git Tag
+`{tag-name}`
+
+## Files Changed
+{Summary of files created/modified/deleted}
+```
+
+## Step 6: Bump Version
+
+GSD-T tracks project version in `.gsd-t/progress.md` using semantic versioning: `Major.Minor.Patch`
+
+- **Major** (X.0.0): Breaking changes, major rework, v1 launch
+- **Minor** (0.X.0): New features, completed feature milestones
+- **Patch** (0.0.X): Bug fixes, minor improvements, cleanup milestones
+
+Determine the version bump based on the milestone:
+1. Read current version from `.gsd-t/progress.md`
+2. Assess milestone scope:
+   - Was this a major/breaking milestone? → bump **major**, reset minor to 0, reset patch to **10**
+   - Was this a feature milestone? → bump **minor**, reset patch to **10**
+   - Was this a bugfix/cleanup/debt milestone? → bump **patch** (increment by 1)
+   - **Patch numbers are always 2 digits (≥10).** After any minor/major reset, start at 10, never 0 or 1.
+3. Update version in `.gsd-t/progress.md`
+4. If a package manifest exists (`package.json`, `pyproject.toml`, `Cargo.toml`, etc.), update its version to match
+5. Update `README.md` version badge or version reference if present
+6. Include version in the milestone summary and git tag
+
+## Step 7: Clean Working State
+
+Reset `.gsd-t/` for next milestone:
+
+1. Archive current domains → `.gsd-t/milestones/{name}/domains/`
+2. Clear `.gsd-t/domains/` (empty, ready for next partition)
+3. Archive current reports → milestone folder
+4. Clear `.gsd-t/impact-report.md`, `.gsd-t/test-coverage.md`
+5. Update `.gsd-t/progress.md`:
+
+```markdown
+# GSD-T Progress
+
+## Version: {new version}
+## Current Milestone
+None — ready for next milestone
+
+## Completed Milestones
+| Milestone | Version | Completed | Tag |
+|-----------|---------|-----------|-----|
+| {name} | {version} | {date} | v{version} |
+| {previous} | {version} | {date} | v{version} |
+
+## Decision Log
+- {date}: [success] Milestone "{name}" completed — {summary of what was built}. v{version}
+{Keep all prior decision log entries — they are valuable context}
+```
+
+## Step 8: Update README.md
+
+If `README.md` exists, update it to reflect the completed milestone:
+- Add or update a **Features** / **What's Included** section with capabilities delivered
+- Update version number if displayed in README
+- Update setup instructions if infrastructure changed
+- Update tech stack if new dependencies were added
+- Keep existing user content — merge, don't overwrite
+
+If `README.md` doesn't exist, create one with project name, description, version, tech stack, setup instructions, and link to `docs/`.
+
+## Step 9: Document Ripple
+
+Before creating the git tag, verify all documentation is up to date:
+
+### Always update:
+1. **`.gsd-t/progress.md`** — Already updated in Step 6, verify it's complete with version and milestone state
+2. **`README.md`** — Already updated in Step 7, verify it reflects all delivered capabilities
+
+### Check if affected:
+3. **`docs/requirements.md`** — Verify all requirements delivered in this milestone are marked as complete
+4. **`docs/architecture.md`** — Verify the architecture doc matches the current system state after all milestone work
+5. **`docs/workflows.md`** — Verify any workflows added or changed during the milestone are documented
+6. **`docs/infrastructure.md`** — If infrastructure changed during the milestone (new services, new deployment steps), verify it's documented
+7. **`CLAUDE.md`** — Verify any conventions established during the milestone are captured
+8. **`.gsd-t/techdebt.md`** — Verify any debt resolved during the milestone is marked done, and any new debt discovered is logged
+
+### This is the LAST GATE before tagging — nothing should be undocumented.
+
+## Step 10: Test Verification
+
+Verify the milestone is truly complete:
+
+1. **Run the full test suite**: Execute ALL tests — unit, integration, and E2E
+2. **Run Playwright E2E** (if configured): Detect `playwright.config.*` or Playwright in dependencies. If present, run the full Playwright suite. If specs are missing or stale, invoke `gsd-t-test-sync` first.
+3. **Verify all pass**: Every test must pass. If any fail, fix before tagging (up to 2 attempts)
+4. **Compare to baseline**: If a test baseline was recorded at milestone start, verify coverage has improved or at minimum not regressed
+5. **Log test results**: Include test pass/fail counts in the milestone summary (Step 4)
+
+## Step 11: Create Git Tag
+
+```bash
+# Stage any remaining .gsd-t changes
+git add .gsd-t/
+
+# Commit the archive
+git commit -m "milestone({milestone-name}): complete and archive v{version}"
+
+# Create annotated tag with version
+git tag -a "v{version}" -m "v{version} — Milestone: {name}
+
+{Brief description from summary}
+
+Domains: {list}
+Verified: {date}"
+```
+
+## Step 12: Report Completion
+
+```
+✅ Milestone "{name}" completed — v{version}
+
+📁 Archived to: .gsd-t/milestones/{name}-{date}/
+🏷️  Tagged as: v{version}
+
+Summary:
+- Version: {previous version} → {new version}
+- Domains completed: {N}
+- Tasks completed: {N}
+- Contracts: {N} defined/updated
+- Tests: {N} added/updated
+
+Next steps:
+- Push tags: git push origin v{version}
+- Start next milestone: /user:gsd-t-milestone "{next name}"
+- Or view roadmap: /user:gsd-t-status
+```
+
+## Step 13: Update Roadmap (if exists)
+
+If `.gsd-t/roadmap.md` exists:
+- Mark this milestone as complete
+- Update any dependent milestones
+- Highlight next recommended milestone
+
+## Error Handling
+
+### If verify failed:
+"Cannot complete — verification found issues. Address them first or use `--force`."
+
+### If no milestone active:
+"No active milestone to complete. Run `/user:gsd-t-status` to see state."
+
+### If git operations fail:
+- Still create archive
+- Report git error
+- Provide manual tag command
+
+$ARGUMENTS
+
+## Auto-Clear
+
+All work is committed to project files. Execute `/clear` to free the context window for the next command.

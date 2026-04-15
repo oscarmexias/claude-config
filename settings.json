@@ -1,0 +1,324 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "PATH": "/Users/oscar.mejia/.nvm/versions/node/v24.13.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/oscar.mejia/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  },
+  "permissions": {
+    "allow": [
+      "Bash",
+      "WebFetch(domain:remezcla.com)",
+      "WebFetch(domain:www.merca20.com)",
+      "WebFetch(domain:www.locogringo.com)",
+      "WebFetch(domain:www.bloomberglinea.com)",
+      "WebFetch(domain:knowyourmeme.com)",
+      "WebFetch(domain:www.sopitas.com)",
+      "WebFetch(domain:filmdaily.co)",
+      "WebFetch(domain:www.vice.com)",
+      "WebFetch(domain:www.vallartadaily.com)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "Bash(rm -rf components)",
+      "Bash(mkdir -p ui icons hooks data services)",
+      "Bash(rm -f lib/types.ts lib/mock-data.ts)",
+      "Bash(rmdir lib)",
+      "Bash(npx next build)",
+      "Bash(npm ls @eslint/eslintrc)",
+      "mcp__socios-design-maria__get_token",
+      "WebFetch(domain:empresite.eleconomista.es)",
+      "WebFetch(domain:www.proinca.es)",
+      "WebFetch(domain:stitch.withgoogle.com)",
+      "Bash(npx @_davideast/stitch-mcp --version)",
+      "Bash(npx @_davideast/stitch-mcp init)",
+      "Read(//Users/oscar.mejia/**)",
+      "mcp__obsidian__add-tags",
+      "mcp__obsidian__create-directory",
+      "mcp__obsidian__create-note",
+      "mcp__obsidian__delete-note",
+      "mcp__obsidian__edit-note",
+      "mcp__obsidian__list-available-vaults",
+      "mcp__obsidian__move-note",
+      "mcp__obsidian__read-note",
+      "mcp__obsidian__remove-tags",
+      "mcp__obsidian__rename-tag",
+      "mcp__obsidian__search-vault",
+      "mcp__pencil"
+    ]
+  },
+  "model": "opusplan",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/oscar.mejia/.claude/hooks/rtk-rewrite.sh"
+          },
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Bash command requested\" with title \"Claude Code\" subtitle \"Authorization may be needed\" sound name \"Submarine\"'",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"File edit requested\" with title \"Claude Code\" sound name \"Tink\"'",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"New file write requested\" with title \"Claude Code\" sound name \"Tink\"'",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/pieces-context-injector.js\""
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-update-check.js\""
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-heartbeat.js\"",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/cx-watch.js\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-heartbeat.js\"",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Hero.aiff",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-heartbeat.js\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-heartbeat.js\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-heartbeat.js\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "TeammateIdle": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-heartbeat.js\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-heartbeat.js\"",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Code notification\" with title \"Claude Code\" sound name \"Pop\"'",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-heartbeat.js\"",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/obsidian-session-log.js\"",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/voice-journal-draft.js\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-heartbeat.js\"",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/obsidian-session-log.js\"",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/voice-journal-draft.js\"",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/gsd-t-auto-route.js\""
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/ui-arsenal-detector.js\""
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/oscar.mejia/.claude/scripts/reflection-injector.js\"",
+            "async": true
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/oscar.mejia/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "feature-dev@claude-plugins-official": true,
+    "semgrep@claude-plugins-official": true,
+    "coderabbit@claude-plugins-official": true,
+    "agent-sdk-dev@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": false,
+    "playground@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "claude-mem@thedotmack": true
+  },
+  "extraKnownMarketplaces": {
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
+    }
+  },
+  "voiceEnabled": true,
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "language": "Español"
+}
