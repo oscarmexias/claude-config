@@ -58,3 +58,4 @@ mcp-needs-auth-cache.json
 .DS_Store
 .AppleDouble
 ._*
+plugins/marketplaces/
