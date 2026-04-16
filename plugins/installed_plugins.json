@@ -4,10 +4,10 @@
     "feature-dev@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/feature-dev/67356b9d5aae",
-        "version": "67356b9d5aae",
+        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/feature-dev/206eb7f14653",
+        "version": "206eb7f14653",
         "installedAt": "2026-02-25T23:43:58.004Z",
-        "lastUpdated": "2026-04-15T22:44:04.748Z",
+        "lastUpdated": "2026-04-15T22:52:19.872Z",
         "gitCommitSha": "55b58ec6e5649104f926ba7558b567dc8d33c5ff"
       }
     ],
@@ -34,20 +34,20 @@
     "agent-sdk-dev@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/agent-sdk-dev/67356b9d5aae",
-        "version": "67356b9d5aae",
+        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/agent-sdk-dev/206eb7f14653",
+        "version": "206eb7f14653",
         "installedAt": "2026-02-25T23:44:15.606Z",
-        "lastUpdated": "2026-04-15T22:44:04.751Z",
+        "lastUpdated": "2026-04-15T22:52:19.875Z",
         "gitCommitSha": "55b58ec6e5649104f926ba7558b567dc8d33c5ff"
       }
     ],
     "commit-commands@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/commit-commands/67356b9d5aae",
-        "version": "67356b9d5aae",
+        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/commit-commands/206eb7f14653",
+        "version": "206eb7f14653",
         "installedAt": "2026-02-25T23:44:59.651Z",
-        "lastUpdated": "2026-04-15T22:44:04.737Z",
+        "lastUpdated": "2026-04-15T22:52:19.734Z",
         "gitCommitSha": "55b58ec6e5649104f926ba7558b567dc8d33c5ff"
       }
     ],
@@ -74,40 +74,40 @@
     "pr-review-toolkit@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/pr-review-toolkit/67356b9d5aae",
-        "version": "67356b9d5aae",
+        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/pr-review-toolkit/206eb7f14653",
+        "version": "206eb7f14653",
         "installedAt": "2026-02-25T23:45:15.165Z",
-        "lastUpdated": "2026-04-15T22:44:04.770Z",
+        "lastUpdated": "2026-04-15T22:52:19.887Z",
         "gitCommitSha": "55b58ec6e5649104f926ba7558b567dc8d33c5ff"
       }
     ],
     "security-guidance@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/security-guidance/67356b9d5aae",
-        "version": "67356b9d5aae",
+        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/security-guidance/206eb7f14653",
+        "version": "206eb7f14653",
         "installedAt": "2026-02-25T23:45:31.941Z",
-        "lastUpdated": "2026-04-15T22:44:04.732Z",
+        "lastUpdated": "2026-04-15T22:52:19.564Z",
         "gitCommitSha": "55b58ec6e5649104f926ba7558b567dc8d33c5ff"
       }
     ],
     "playground@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/playground/67356b9d5aae",
-        "version": "67356b9d5aae",
+        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/playground/206eb7f14653",
+        "version": "206eb7f14653",
         "installedAt": "2026-02-25T23:45:37.835Z",
-        "lastUpdated": "2026-04-15T22:44:04.756Z",
+        "lastUpdated": "2026-04-15T22:52:19.881Z",
         "gitCommitSha": "55b58ec6e5649104f926ba7558b567dc8d33c5ff"
       }
     ],
     "code-review@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/code-review/67356b9d5aae",
-        "version": "67356b9d5aae",
+        "installPath": "/Users/oscar.mejia/.claude/plugins/cache/claude-plugins-official/code-review/206eb7f14653",
+        "version": "206eb7f14653",
         "installedAt": "2026-02-25T23:45:40.830Z",
-        "lastUpdated": "2026-04-15T22:44:04.708Z",
+        "lastUpdated": "2026-04-15T22:52:19.459Z",
         "gitCommitSha": "55b58ec6e5649104f926ba7558b567dc8d33c5ff"
       }
     ],

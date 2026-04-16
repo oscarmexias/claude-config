@@ -1,0 +1,9 @@
+gh
+oven-sh/bun/bun
+poppler
+rtk
+semgrep
+tmux
+uv
+watchman
+yt-dlp

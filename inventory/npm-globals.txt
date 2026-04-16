@@ -1,0 +1,8 @@
+@tekyzinc/gsd-t@2.39.12
+claude-mem@11.0.0
+corepack@0.34.5
+mcp-remote@0.1.38
+npm@11.6.2
+skill-creator@1.5.1
+vercel@50.22.1
+

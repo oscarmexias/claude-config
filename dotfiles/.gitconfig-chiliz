@@ -1,0 +1,6 @@
+[user]
+	name = Oscar Mejía
+	email = oscar.mejia@chiliz.com
+[credential]
+	helper =
+	helper = !/Users/oscar.mejia/.gh-credential-chiliz.sh

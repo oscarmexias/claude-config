@@ -1,0 +1,15 @@
+[user]
+	name = oscarmexias
+	email = oscarmexias@gmail.com
+
+[includeIf "gitdir:~/Desktop/Chiliz/"]
+	path = ~/.gitconfig-chiliz
+
+[includeIf "gitdir:~/Desktop/Proyectos/"]
+	path = ~/.gitconfig-personal
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

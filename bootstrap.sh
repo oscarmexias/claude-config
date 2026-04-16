@@ -62,8 +62,20 @@ else
   fi
 fi
 
-# ── Step 4: Permissions ────────────────────────────────────────────────────
-echo "[4/4] Fixing executable permissions..."
+# ── Step 4: Dotfiles → ~ ──────────────────────────────────────────────────
+echo "[4/5] Restoring dotfiles..."
+for f in .zshrc .gitconfig .gitconfig-chiliz .gitconfig-personal; do
+  if [ -f ~/.claude/dotfiles/$f ]; then
+    if [ -f ~/$f ]; then
+      cp ~/$f ~/${f}.bak 2>/dev/null && echo "  Backed up ~/$f → ~/${f}.bak"
+    fi
+    cp ~/.claude/dotfiles/$f ~/$f
+    echo "  ✓ ~/$f restored"
+  fi
+done
+
+# ── Step 5: Permissions ────────────────────────────────────────────────────
+echo "[5/5] Fixing executable permissions..."
 chmod +x ~/.claude/bootstrap.sh \
          ~/.claude/statusline-command.sh \
          ~/.claude/statusline-debug.sh 2>/dev/null || true
@@ -80,17 +92,30 @@ echo ""
 echo "=== Bootstrap complete ==="
 echo ""
 echo "Manual steps remaining:"
-echo "  1. Create ~/.secrets from your password manager (template: ~/.secrets.example)"
-echo "     chmod 600 ~/.secrets"
-echo "     Add to ~/.zshrc: source ~/.secrets"
+echo "  1. Secrets → copy ~/.secrets from password manager:"
+echo "     Template: cat ~/.claude/.secrets.example"
+echo "     chmod 600 ~/.secrets && source ~/.secrets"
 echo ""
-echo "  2. Restore .env.local files for individual projects (fantoken-fantasy, etc.)"
+echo "  2. Obsidian vaults:"
+echo "     git clone https://github.com/oscarmexias/obsidian-personal ~/Documents/Obsidian-Personal"
+echo "     gh auth switch --user oscar-mejia_chilizgr"
+echo "     git clone https://github.com/oscar-mejia_chilizgr/obsidian-chiliz ~/Documents/Obsidian-Chiliz"
+echo "     gh auth switch --user oscarmexias"
 echo ""
-echo "  3. Clone individual projects into their workspaces:"
+echo "  3. Restore .env.local files for individual projects (fantoken-fantasy, etc.)"
+echo ""
+echo "  4. Clone individual projects (see ~/.claude/NEW-MACHINE-SETUP.md for full list):"
 echo "     ~/Desktop/Proyectos/{Resonant Migration,SBS,Kinez,...}"
-echo "     ~/Desktop/Chiliz/{token-hunt,passkey-login,fantoken-fantasy,...}"
+echo "     ~/Desktop/Chiliz/{fantoken-fantasy,passkey-login,locker-room,...}"
 echo ""
-echo "  4. Reinstall Claude Code plugins:"
+echo "  5. Reinstall Claude Code plugins:"
 echo "     cat ~/.claude/plugins/installed_plugins.json"
 echo ""
-echo "  5. Restart terminal or: source ~/.zshrc"
+echo "  6. Review inventory for brew/npm/MCP reinstall:"
+echo "     cat ~/.claude/inventory/brew-formulae.txt"
+echo "     cat ~/.claude/inventory/npm-globals.txt"
+echo "     cat ~/.claude/inventory/mcp-servers.txt"
+echo ""
+echo "  7. Restart terminal or: source ~/.zshrc"
+echo ""
+echo "Full guide: ~/.claude/NEW-MACHINE-SETUP.md"

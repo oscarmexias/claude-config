@@ -1,0 +1,6 @@
+[user]
+	name = Oscar Mejía
+	email = oscarmexias@gmail.com
+[credential]
+	helper =
+	helper = !/Users/oscar.mejia/.gh-credential-personal.sh

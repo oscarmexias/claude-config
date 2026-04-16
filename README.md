@@ -31,6 +31,13 @@ Private repo backing up Oscar's Claude Code global configuration.
 These are relative symlinks: `../../.agents/skills/<name>`.
 After bootstrap, they resolve correctly as long as both dirs are at `~` level.
 
+## Key docs
+
+- **[NEW-MACHINE-SETUP.md](NEW-MACHINE-SETUP.md)** — Complete step-by-step guide from a blank machine
+- **[WORKING-STYLE.md](WORKING-STYLE.md)** — Work philosophy, frameworks (GSD-T/BMAD/Paperclip), session protocol, conventions
+- **[dotfiles/](dotfiles/)** — `.zshrc`, `.gitconfig`, `.gitconfig-chiliz`, `.gitconfig-personal`
+- **[inventory/](inventory/)** — Snapshots: brew formulae, npm globals, MCP servers
+
 ## Restoring on a new machine
 
 ```bash

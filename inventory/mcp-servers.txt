@@ -1,0 +1,24 @@
+Checking MCP server health…
+
+claude.ai Linear: https://mcp.linear.app/mcp - ✓ Connected
+claude.ai Google Drive: https://drivemcp.googleapis.com/mcp/v1 - ✓ Connected
+claude.ai Supabase: https://mcp.supabase.com/mcp - ✓ Connected
+claude.ai Gmail: https://gmail.mcp.claude.com/mcp - ✓ Connected
+claude.ai Google Calendar: https://gcal.mcp.claude.com/mcp - ✓ Connected
+claude.ai Vercel: https://mcp.vercel.com - ✓ Connected
+claude.ai Slack: https://mcp.slack.com/mcp - ✓ Connected
+claude.ai Figma: https://mcp.figma.com/mcp - ✓ Connected
+claude.ai Hugging Face: https://huggingface.co/mcp?login&gradio=none - ! Needs authentication
+plugin:semgrep:semgrep: semgrep mcp - ✓ Connected
+plugin:claude-mem:mcp-search: /Users/oscar.mejia/.claude/plugins/cache/thedotmack/claude-mem/11.0.1/scripts/mcp-server.cjs  - ✓ Connected
+context7: npx -y @upstash/context7-mcp - ✓ Connected
+playwright: npx -y @playwright/mcp@latest - ✓ Connected
+github: npx -y @modelcontextprotocol/server-github - ✓ Connected
+PiecesMCP: http://localhost:39300/model_context_protocol/2025-03-26/sse (SSE) - ✓ Connected
+nano-banana: npx -y nano-banana-mcp - ✓ Connected
+obsidian: npx -y obsidian-mcp /Users/oscar.mejia/Documents/Obsidian-Personal - ✓ Connected
+atlassian: mcp-remote https://mcp.atlassian.com/v1/sse --transport sse-only - ✓ Connected
+youtube-transcript: npx -y @kimtaeyoon83/mcp-server-youtube-transcript - ✓ Connected
+pencil: /Users/oscar.mejia/.antigravity/extensions/highagency.pencildev-0.6.33-universal/out/mcp-server-darwin-arm64 --app antigravity - ✓ Connected
+scrapling: /Users/oscar.mejia/.local/venvs/scrapling/bin/scrapling mcp - ✓ Connected
+perplexity: /bin/bash -c source ~/.secrets && /opt/homebrew/bin/uvx mcp-server-perplexity - ✓ Connected
